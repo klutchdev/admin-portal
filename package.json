@@ -1,6 +1,6 @@
 {
-  "name": "babajn-admin-portal",
-  "version": "0.1.0",
+  "name": "babajan-admin-portal",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reach/router": "^1.3.4",

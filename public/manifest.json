@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Babajan admin portal",
+  "name": "Admin portal for babajan admin",
   "icons": [
     {
       "src": "favicon.ico",

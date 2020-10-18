@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./App.css";
 import UserProvider from "./providers/UserProvider";
+import UserContext from "./providers/UserProvider";
+import Dashboard from "./components/dashboard";
 
-import AdminDashboard from "./components/sign-in";
+const App = () => {
+  const user = useContext(UserContext);
 
-const App = () => (
-  <UserProvider>
-    <AdminDashboard />
-  </UserProvider>
-);
+  return user ? (
+    <UserProvider>
+      <Dashboard />
+    </UserProvider>
+  ) : (
+    <UserProvider>
+      <AuthPage />
+    </UserProvider>
+  );
+};
 
 export default App;

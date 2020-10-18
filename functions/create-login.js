@@ -1,6 +1,5 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
-const { auth } = require("firebase-admin");
 admin.initializeApp();
 
 const db = admin.firestore();
@@ -23,14 +22,14 @@ exports.createLogin = functions.firestore
         admin
           .auth()
           .createUser({
-            uid: userID,
+            // uid: userID,
             email: userData.email,
-            emailVerified: false,
+            // emailVerified: false,
             phoneNumber: userData.phone,
-            password: "secretPassword",
+            // password: "secretPassword",
             displayName: userData.firstName,
-            photoURL: "",
-            disabled: false,
+            // photoURL: "",
+            // disabled: false,
           })
           .then(function (userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.

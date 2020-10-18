@@ -52,4 +52,7 @@ export const getUserDocument = async (uid) => {
   }
 };
 
+export const handleSignout = () =>
+  auth.signOut().catch((error) => console.error("Error", error));
+
 export default firebase;
