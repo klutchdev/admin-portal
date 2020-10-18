@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "@reach/router";
-import { Router } from "@reach/router";
+import React, { useState, useContext } from "react";
+import { Link, Router } from "@reach/router";
 import "./sign-in.css";
 
 import { auth } from "../firebase";
@@ -26,6 +25,15 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const onChangeHandler = (e) => {
+    const { name, value } = e.currentTarget;
+    if (name === "userEmail") {
+      setEmail(value);
+    } else if (name === "userPassword") {
+      setPassword(value);
+    }
+  };
+
   const signInHandler = (e, email, password) => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(email, password).catch((error) => {
@@ -34,27 +42,20 @@ const SignInForm = () => {
     });
   };
 
-  const onChangeHandler = (e) => {
-    const { name, value } = e.currentTarget;
-
-    if (name === "userEmail") {
-      setEmail(value);
-    } else if (name === "userPassword") {
-      setPassword(value);
-    }
-  };
-
   // Component
   return (
     <div className="text-center">
-      {error !== null && <Header content={error} />}
-      <Header content="Sign in" />
-      <form className="form-signin bg-light card p-4 shadow-lg">
+      <form className="form-signin  card p-4 shadow-lg">
+        {!error ? (
+          <Header content="Admin portal" />
+        ) : (
+          <Header content={error} />
+        )}
+        {/* {error !== null && <Header content={error} />} */}
         <input
           type="email"
           name="userEmail"
           value={email}
-          id="userEmail"
           className="form-control form-control-lg my-3"
           placeholder="Email"
           onChange={(e) => onChangeHandler(e)}
@@ -64,21 +65,17 @@ const SignInForm = () => {
           type="password"
           name="userPassword"
           value={password}
-          id="userPassword"
           placeholder="Password"
           className="form-control form-control-lg my-3"
           onChange={(e) => onChangeHandler(e)}
         />
 
         <Button
-          className="button btn btn-lg btn-dark btn-block mt-3"
-          type="submit"
+          className="button btn btn-dark btn-block mt-3"
+          type="button"
           labelText="Sign in"
-          onClick={(e) => {
-            signInHandler(e, email, password);
-          }}
+          onClick={(e) => signInHandler(e, email, password)}
         />
-
         <Link to="passwordReset" className="mt-4">
           Forgot password?
         </Link>
@@ -112,15 +109,18 @@ const PasswordReset = () => {
       })
       .catch(() => {
         setError("Error resetting password");
+        setTimeout(() => {
+          setError(null);
+        }, 3000);
       });
   };
 
   return (
-    <div className="container text-center">
-      <Header content="Reset your password" />
-      {emailHasBeenSent && <Header content="An email has been sent!" />}
-      {error !== null && <Header content={error} />}
-      <form action="" className="bg-gradient bg-light card p-4 shadow-lg">
+    <div className="text-center">
+      <form action="" className="form-signin card p-4 shadow">
+        {error === null && <Header content="Password reset" />}
+        {emailHasBeenSent && <Header content="An email has been sent!" />}
+        {error !== null && <Header content={error} />}
         <input
           type="email"
           name="userEmail"
@@ -131,16 +131,15 @@ const PasswordReset = () => {
           onChange={(e) => onChangeHandler(e)}
         />
         <Button
-          className="button btn btn-lg btn-dark btn-block mt-3"
+          className="button btn btn-dark btn-block mt-3"
           type="submit"
           labelText="Send reset link"
           onClick={sendResetEmail}
         />
+        <Link className="mt-4 mb-2" to="/">
+          Back to sign in page
+        </Link>
       </form>
-
-      <Link className="mt-4" to="/">
-        Back to sign in page
-      </Link>
     </div>
   );
 };

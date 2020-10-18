@@ -1,10 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/analytics";
 import "firebase/firestore";
 import "firebase/functions";
 
-const firebaseConfig = {
+firebase.initializeApp({
   apiKey: "AIzaSyCjLgAX5zTmOoITvQiApdH3-zpbhX7H-fQ",
   authDomain: "babajan-manage.firebaseapp.com",
   databaseURL: "https://babajan-manage.firebaseio.com",
@@ -13,12 +12,11 @@ const firebaseConfig = {
   messagingSenderId: "541779636128",
   appId: "1:541779636128:web:1a9a813728bf6cc570bec5",
   measurementId: "G-XLME7XL87W",
-};
+});
 
-firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
-// export const functions = firebase.functions();
+export const functions = firebase.functions();
 
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;

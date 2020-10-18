@@ -1,3 +1,5 @@
+export { createLogin } from "./create-login";
+
 // const functions = require('firebase-functions');
 
 //
