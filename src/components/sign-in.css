@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   padding: 10%;
-
 }
 
 .form-signin {
@@ -28,15 +27,12 @@
   font-weight: 600;
   border-width: 2px;
   font-size: 1.25rem;
-  /* border-color: #13131350; */
 }
 
 
 .form-signin .form-control:focus,
 .form-signin .form-control:active {
-  /* z-index: 0; */
   outline: none;
   border-width: 2px;
-  /* border-color: #13131375; */
   box-shadow: none;
 }
